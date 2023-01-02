@@ -1,0 +1,59 @@
+<style>
+  @keyframes line-animation {
+    from{
+        width:0%;
+    }
+    to{
+        width:100%
+    }
+  }
+  @keyframes line-animation-out {
+    from{
+        width:100%;
+    }
+    to{
+        width:0%
+    }
+  }
+  .line{
+    animation-name: line-animation;
+    animation-duration: 0.2s;
+    animation-timing-function: ease;
+  }
+  .line-out{
+    animation-name: line-animation-out;
+    animation-duration: 0.2s;
+    animation-timing-function: ease;
+  }
+</style>
+<div class="absolute lg:-translate-y-[6rem] xl:-translate-y-[16rem]  -z-10 -mx-10">
+  <%= image_tag "gradient 2.png", class: "w-[150rem]" %>
+</div>
+<div class="mt-[2rem] sm:mt-[4rem] md:mt-[8rem] flex justify-center">
+  <div class="bg-[#100E10] space-y-10 flex flex-col items-center rounded-[3rem] outline outline-1
+  w-full max-w-[90%] sm:max-w-[60%] lg:max-w-[50%] xl:max-w-[40%]
+  px-10 sm:px-[5rem] py-6 
+  md:px-[6rem]">
+    <div class="">
+      <%= content_tag(:div, "",class:"flex space-x-4 text-base font-bold
+    sm:text-2xl ", data:{controller: "form"}) do %>
+        <%= content_tag(:h1, "", class: "cursor-pointer", data: {action: "click->form#registerAnimation"}) do %>
+          Register
+          <div id="registerbtn" class="content-[''] bg-stdPink h-[4px] w-full rounded-xl">
+          </div>
+        <% end %>
+        <%= content_tag(:h1, "", class: "cursor-pointer", data: {action: "click->form#loginAnimation"}) do %>
+          Login
+          <div id = "loginbtn" class="hidden content-[''] bg-stdPink h-[4px] w-full rounded-xl">
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="register form" class="register form">
+      <%= render template: 'devise/registrations/new' %>
+    </div>
+    <div id="login form" class="login hidden form">
+      <%= render template: 'devise/sessions/new' %>
+    </div>
+  </div>
+</div>

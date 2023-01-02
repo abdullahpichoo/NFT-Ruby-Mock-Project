@@ -1,0 +1,13 @@
+<div class="flex flex-col gap-4">
+  <% @cart.orderables.each do |order| %>
+    <%= render 'partials/orderable',nft: order.nft, order: order %>
+  <% end %>
+  <div class="Total_and_buy flex flex-col gap-3 items-end">
+    <h1 class= "text-5xl font-bold">Total: <%= @cart.total %> ETH</h1>
+    <div class="btn text-4xl px-7 py-4 font-bold drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]">
+      <%= form_with(url: buy_all_path) do |f| %>
+        <%= f.submit "Buy All" %>
+      <% end %>
+    </div>
+  </div>
+</div>

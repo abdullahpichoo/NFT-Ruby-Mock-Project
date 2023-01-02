@@ -1,0 +1,23 @@
+<h1>Editing wallet</h1>
+
+<br>
+
+<div>
+
+  <%= form_with(model: @wallet) do |form| %>
+
+  <div>
+    <%= form.label :balance, style: "display: block" %>
+    <%= form.number_field :balance %>
+  </div>
+
+    <div>
+      <p>
+      Current Balance: <%= @wallet.balance %>
+      </p>
+      <%= form.submit "Increase balance"%>
+    </div>
+  <% end %>
+
+  <%= link_to "Back to Home", all_path %>
+</div>

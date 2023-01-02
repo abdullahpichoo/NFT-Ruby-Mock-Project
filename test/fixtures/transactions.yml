@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  NFT_name: MyString
+  NFT_id: 1
+  Buyer_id: 1
+  Seller_id: 1
+  Buyer: MyString
+  Seller: MyString
+  Buy_price: 9.99
+  Change_in_price: 9.99
+  transaction_time: 2023-01-03 00:05:46
+
+two:
+  NFT_name: MyString
+  NFT_id: 1
+  Buyer_id: 1
+  Seller_id: 1
+  Buyer: MyString
+  Seller: MyString
+  Buy_price: 9.99
+  Change_in_price: 9.99
+  transaction_time: 2023-01-03 00:05:46

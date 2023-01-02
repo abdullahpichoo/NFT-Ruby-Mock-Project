@@ -1,0 +1,35 @@
+<%# Main main %>
+<main class = "flex items-center justify-start mb-10">
+  <h1 class = "flex flex-col text-6xl font-bold text-white space-y-5 mr-40">
+    <div class="disc">
+      Discovers Collect
+    </div>
+    <div class="flex items-center space-x-5">
+      <div class="sell">
+        and Sell
+      </div>
+      <%= image_tag "capsule.png", class: "w-44"%>
+    </div>
+    <div class="nft">
+      Remarkable NFTs</div>
+  </h1>
+  <div class="relative face-image flex justify-center items-center">
+    <%= image_tag "nft.jpg", class: "z-10 w-96 rounded-full"%>
+    <%= image_tag "Ellipse 2.png", class: "absolute z-0 w-[100%] h-[100%] -left-40"%>
+  </div>
+</main>
+<%# Hot Items %>
+<section >
+  <h2 class = "text text-4xl font-bold mb-7 text-center">
+    Hot Items
+  </h2>
+  <div class="flex flex-row justify-evenly mb-5">
+    <%= render 'partials/card' %>
+    <%= render 'partials/card' %>
+    <%= render 'partials/card' %>
+  </div>
+  <div class="flex justify-center">
+    <div class="btn text-center text-2xl">Explore</div>
+  </div>
+</section>
+<%= render 'partials/footer' %>

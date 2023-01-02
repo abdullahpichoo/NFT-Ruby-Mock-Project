@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test2Project</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application","https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap", media: 'all', "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <script defer src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class = "font-poppins bg-[#100E10] text-[#ffff] min-h-[100vh]">
+    <div class="background-elements z-0">
+      <%= image_tag "Ellipse 1.png", class: "absolute top-0 left-0 w-1/2" %>
+      <%# <%= render 'partials/bg-elements' %>
+      <p style="color: green" class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+    <main class="mx-10 my-5 flex flex-col relative z-20 min-h-[100vh]">
+      <%= render 'partials/nav' %>
+      <div class="flex-[1]">
+        <%= yield %>
+      </div>
+      <%= render 'partials/footer' %>
+    </main>
+  </body>
+</html>

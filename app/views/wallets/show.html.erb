@@ -1,0 +1,7 @@
+<%= render @wallet %>
+
+<div>
+  <%= link_to "Edit My Wallet", edit_wallet_path(@wallet) %>
+  <%= link_to "My NFTs", wallet_nfts_path(@wallet) %>
+  <%= link_to "Back to Home", all_path %>
+</div>

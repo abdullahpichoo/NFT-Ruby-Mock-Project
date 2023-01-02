@@ -1,0 +1,16 @@
+<h1>Nfts</h1>
+
+<div id="nfts">
+  <% @nfts.each do |nft| %>
+    <%= render nft %>
+    <p>
+      <%= link_to "Show this nft", wallet_nft_path(@wallet,nft) %>
+    </p>
+    <hr>
+  <% end %>
+</div>
+
+<% if @wallet.id==current_user.wallet.id %>
+<%= link_to "Create new NFT", new_wallet_nft_path(@wallet,@nft) %>
+<% end %>
+

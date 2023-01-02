@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  balance: 9.99
+  items_sold: 1
+  earnings: 9.99
+  user: one
+
+two:
+  balance: 9.99
+  items_sold: 1
+  earnings: 9.99
+  user: two

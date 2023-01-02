@@ -1,0 +1,17 @@
+<div class="flex space-x-4 justify-between items-center w-full">
+  <div class="flex flex-col space-y-0.5 max-w-[50%]">
+    <div class="text-lg font-bold truncate overflow-hidden"><%= link_to transaction.NFT_name,wallet_nft_path(transaction.Buyer_id,transaction.NFT_id) %></div>
+    <div class="flex flex-col text-grey2">
+      <div class="text-[0.6rem]">Bought By:<%= link_to transaction.Buyer,user_profile_path(transaction.Buyer_id) %></div>
+      <div class="text-[0.6rem]">Last Owner:<%= link_to transaction.Seller,user_profile_path(transaction.Seller_id) %></div>
+    </div>
+  </div>
+  <div class="flex flex-col justify-center ml-0 space-y-1">
+    <div class="flex items-center">
+      <%= image_tag "eth.png", class: "h-max w-6" %>
+      <div class="price text-xl font-bold"><%= transaction.Buy_price %></div>
+    </div>
+    <div class="font-semibold text-xs text-green-500 truncate overflow-hidden"><%= transaction.Change_in_price %>
+    </div>
+  </div>
+</div>

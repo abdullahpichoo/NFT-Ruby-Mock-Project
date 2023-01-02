@@ -1,0 +1,105 @@
+<style>
+  @keyframes line-animation {
+    from{
+        width:0%;
+    }
+    to{
+        width:100%
+    }
+  }
+  @keyframes line-animation-out {
+    from{
+        width:100%;
+    }
+    to{
+        width:0%
+    }
+  }
+  .line{
+    animation-name: line-animation;
+    animation-duration: 0.2s;
+    animation-timing-function: ease;
+  }
+  .line-out{
+    animation-name: line-animation-out;
+    animation-duration: 0.2s;
+    animation-timing-function: ease;
+  }
+</style>
+<div class="flex flex-col items-center space-y-10">
+  <%# Profile Image and Details %>
+  <div class="profile w-[90%] lg:w-[80%] info outline outline-1 flex flex-col items-center rounded-[2rem]">
+    <div class="image h-[8rem] w-[100%] sm:h-[10rem] lg:h-[12rem]">
+      <%= image_tag "cover.jpg", class: "object-cover w-full h-full rounded-[2rem]" %>
+    </div>
+    <div class="profile w-24 absolute mt-[3.5rem] left-[39%]
+      sm:w-40 sm:left-[40%] sm:mt-[3rem]
+      md:w-44 md:left-[42%] md:mt-[2.5rem]
+      lg:w-48 ls:left-[44%] lg:mt-[3rem]">
+      <%= image_tag "profile.jpg", class: "rounded-full outline outline-1"%>
+    </div>
+    <div class="usernamedetails text-center max-w-[60%] mt-[2rem] sm:mt-[3.5rem] md:mt-[4.5rem]">
+      <h2 class="text-xl font-bold sm:text-2xl md:text-3xl text-white m-2"><%= @user.username %></h2>
+      <div class="details mb-4 space-x-5 sm:space-x-12 flex text-sm font-regular text-grey2 
+      sm:text-xl md:text-2xl ">
+        <div class="balance text-center max-w-[33%] ">
+          Balance
+          <div class="flex items-center gap-2">
+            <%= turbo_frame_tag "wallet_balance" do %>
+              <div class="amount text-white font-bold truncate">
+                <%= @wallet.balance %> ETH
+              </div>
+            <% end %>
+            <%= form_with(url: wallet_path(current_user.wallet), method: :put,data:{ turbo_frame: "price"}) do |f|%>
+              <%= f.hidden_field :balance, value:1 %>
+              <%= f.submit "+" , class: "cursor-pointer text-white px-2.5 py-0.5 bg-[#DF3C6C] w-fit font-semibold rounded-full cursor-pointer duration-200 transition-all;"%>
+            <% end %>
+          </div>
+        </div>
+        <div class="earnings text-center max-w-[33%]">
+          Earnings
+          <div class="amount  text-white font-bold  truncate">
+            <%= @wallet.earnings %>ETH</div>
+        </div>
+        <div class="sold text-center max-w-[33%]">
+          Sales
+          <div class="amount  text-white font-bold  truncate">
+            <%= @wallet.items_sold%></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# Toggle Switches %>
+  <div class="text-base font-bold sm:text-xl md:text-3xl">
+    <%= content_tag(:div, "",class:"flex items-center space-x-1.5 sm:space-x-10", data:{controller: "hello"}) do %>
+      <%= content_tag(:div, "My NFTs", class: "cursor-pointer hover:bg-neutral-800 px-3 py-2 rounded-2xl", data: {action: "click->hello#NFTLineAnimation"}) do %>
+        NFTs
+        <div id="nftbtn" class="content-[''] bg-stdPink h-[4px] w-full rounded-xl">
+        </div>
+      <% end %>
+      <% if user_signed_in? && current_user.id==@user.id %>
+        <%= content_tag(:div, "Edit Profile", class: "cursor-pointer hover:bg-neutral-800 px-3 py-2 rounded-2xl", data: {action: "click->hello#ProfileLineAnimation"}) do %>
+          Edit Profile
+          <div id = "pfpbtn" class="hidden content-[''] bg-stdPink h-[4px] w-full rounded-xl">
+          </div>
+        <% end %>
+        <%= button_to "Log Out", destroy_user_session_path , method: :delete, class: "cursor-pointer hover:bg-neutral-800 px-3 py-2 rounded-2xl" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div id="mynfts" class = "grid gap-5 place-items-center">
+    <div id="mynfts" class="nfts gap-4 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-10">
+      <% @nfts.each do |nft|%>
+        <%= render nft%>
+      <% end%>
+    </div>
+    <% if user_signed_in? && current_user.id==@user.id %>
+      <div class="btn text-4xl px-7 py-4 font-bold drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]">
+        <%= link_to "Create NFT", new_wallet_nft_path(@wallet),  class:"text-end"%>
+      </div>
+    <% end %>
+  </div>
+  <div id="editprofile" class="hidden editprofile">
+    <%= render template: 'devise/registrations/edit' %>
+  </div>
+</div>

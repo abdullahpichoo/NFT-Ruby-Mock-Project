@@ -1,0 +1,9 @@
+<h1 class= "text-5xl font-bold"><%= current_user.username %> Cart</h1>
+<br>
+<%= turbo_frame_tag "cart" do %>
+  <% if @cart.orderables.count>0 %>
+    <%= render @cart %>
+  <% else %>
+    Cart is empty
+  <% end %>
+<% end %>

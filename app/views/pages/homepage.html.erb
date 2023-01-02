@@ -1,0 +1,92 @@
+<%# Main main %>
+<main class = "flex flex-col items-center justify-center space-y-12 mb-10">
+  <%# Hero Section %>
+  <article class = "xl:flex items-center space-x-5 justify-between">
+    <%# <h3 class = "text-[0.65rem] font-normal" style = "color:#DF3C6C;">The NFT Marketplace with everything for everyone</h3> %>
+    <div class="heading flex flex-col text-3xl items-center justify-center font-bold text-white space-y-6
+  sm:text-6xl md:text-7xl lg:text-8xl xl:space-y-12">
+      <h1 class="disc text-center">
+        Discover Collect
+      </h1>
+      <div class="sell-with-image flex items-center space-x-5">
+        <h1 class="sell">
+          and Sell
+        </h1>
+        <div class="image m-0 w-24 sm:w-36 md:w-44 lg:w-52 xl:w-60 hover:scale-105 transition-all duration-200">
+          <%= image_tag "capsule.png" %>
+        </div>
+      </div>
+      <h1 class="nft">
+        Remarkable NFTs</h1>
+    </div>
+    <%# Face Image (on Desktop) %>
+    <div class="hidden xl:block w-[28rem] face-image drop-shadow-[-22px_-5px_111px_rgba(255,255,255,0.25)] hover:scale-105 transition-all duration-200"  >
+      <%= image_tag "Face HD.jpg", class: "rounded-full" %>
+    </div>
+  </article>
+  <%# Bullet Points %>
+  <article class = "flex flex-col space-y-7 justify-center font-semibold">
+    <div class="bullets-image flex space-x-5 xl:space-x-[10rem] items-center">
+      <div class="hidden xl:block w-[25rem]"  >
+        <%= image_tag "Front Face NFT.png"%>
+      </div>
+      <div class="bullet-points text-lg flex flex-col space-y-2
+       sm:text-2xl md:text-3xl lg:text-4xl lg:space-y-10">
+        <div class="bullet flex items-center space-x-4">
+          <%= image_tag "pink star.png", class: "star w-8"%>
+          <h3>Mint your own NFTs</h3>
+        </div>
+        <div class="bullet flex items-center space-x-4">
+          <%= image_tag "pink star.png", class: "star w-8"%>
+          <h3>Sell at the best prices</h3>
+        </div>
+        <div class="bullet flex items-center space-x-4">
+          <%= image_tag "pink star.png", class: "star w-8"%>
+          <h3>Track all your stats</h3>
+        </div>
+        <%# Get Started Button (on Tablet & Desktop) %>
+        <div class="hidden lg:block btn text-4xl py-5 px-5 self-center 
+        sm:text-3xl md:text-4xl xl:drop-shadow-[-20px_7px_150px_rgba(255,255,255,0.7)]">
+          <%= link_to "Get Started", new_user_registration_path %>
+        </div>
+      </div>
+      <div class="hidden xl:hidden lg:block face-image w-80 drop-shadow-[-22px_-5px_111px_rgba(255,255,255,0.25)] hover:scale-105 transition-all duration-200"  >
+        <%= image_tag "Face HD.jpg", class: "rounded-full" %>
+      </div>
+    </div>
+    <%# Get Started Button %>
+    <div class="lg:hidden btn text-2xl py-3 px-5 self-center sm:text-3xl md:text-4xl">
+      <%= link_to "Get Started", new_user_registration_path %>
+    </div>
+  </article>
+  <%# Face Image %>
+  <article class = "lg:hidden">
+    <div class="flex items-center space-x-5 sm:space-x-12">
+      <div class="discover text-bold font-bold text-2xl flex flex-col space-y-2
+      sm:text-5xl">
+        <h2>
+          Discover the</h2>
+        <h2 style = "color:#DF3C6C;">Hottest NFTs</h2>
+        <h2>out there!</h2>
+      </div>
+      <div class="face-image w-40 sm:w-60 md:w-72 drop-shadow-[-22px_-5px_111px_rgba(255,255,255,0.25)]"  >
+        <%= image_tag "Face HD.jpg", class: "rounded-full" %>
+      </div>
+    </div>
+  </article>
+  <%# Hot Items %>
+  <article class = "flex flex-col items-center space-y-10">
+    <h2 class= "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Hot Items</h2>
+    <div class="cards space-y-4 sm:flex space-x-4 sm:space-y-0">
+      <%= render 'partials/card' %>
+      <%= render 'partials/card' %>
+      <div class="hidden lg:block">
+        <%= render 'partials/card' %>
+      </div>
+    </div>
+    <div class="btn text-2xl sm:text-3xl md:text-4xl lg:py-5 py-3 px-5 self-center sm:text-3xl drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]">
+
+      <%= link_to "Explore", all_path %>
+    </div>
+  </article>
+</main>

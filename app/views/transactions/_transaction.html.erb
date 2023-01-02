@@ -1,0 +1,22 @@
+<div id="<%= dom_id transaction %>">
+  <p>
+    <strong>NFT:</strong>
+    <%= transaction.NFT_name %>
+  </p>
+  <p>
+    <strong>Bought By:</strong>
+    <%= link_to transaction.Buyer,user_profile_path(transaction.Buyer_id) %>
+  </p>
+  <p>
+    <strong>Sold By:</strong>
+    <%= link_to transaction.Seller,user_profile_path(transaction.Seller_id) %>
+  </p>
+  <p>
+    <strong>Buy price:</strong>
+    <%= transaction.Buy_price %>
+  </p>
+  <p>
+    <strong>Change in price:</strong>
+    <%= transaction.Change_in_price %>
+  </p>
+</div>
