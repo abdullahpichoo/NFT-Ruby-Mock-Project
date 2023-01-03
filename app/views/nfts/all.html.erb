@@ -35,7 +35,7 @@
     <div class="font-bold text-2xl sm:text-3xl md:text-4xl">
       Discover Items</div>
     <%= form_with url:all_path, method: :get, data:{ turbo_frame: "nfts",turbo_action: "advance",controller: "form", action:"input->form#submit" } do %>
-      <%= text_field_tag "filter",nil,placeholder: "Search",class: "bg-transparent text-white mt-5 w-48 outline outline-1 outline-grey2 p-1.5 px-4 text-sm font-light rounded-3xl md:text-xl md:px-5 md:w-60" %>
+      <%= text_field_tag "filter",nil,placeholder: "Search",class: "bg-transparent text-white mt-5 w-48 outline outline-1 outline-grey2 focus:outline-[#DF3C6C] focus:border-0 focus:ring-0 p-1.5 px-4 text-sm font-light rounded-3xl md:text-xl md:px-5 md:w-60" %>
     <% end %>
   </div>
   <%# NFTS %>

@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="flex justify-between items-center mt-2">
-        <div class="btn-outline text-sm font-bold"><%= link_to "View", wallet_nft_path(nft.wallet_id,nft) %></div>
+        <%= link_to "View", wallet_nft_path(nft.wallet_id,nft),class:"btn-outline text-sm font-bold" %>
         <div class="hearts text-xs font-semibold">
           <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="stroke-stdPink w-5 h-5">

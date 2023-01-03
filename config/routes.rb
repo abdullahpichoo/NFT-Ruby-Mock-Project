@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   root 'pages#homepage'
   get 'explore', to: 'pages#explore'
   get 'nftshow', to: 'pages#nftshow'
-  get '/:user_id/profile', to: 'pages#profile',as: 'user_profile'
+  get '/:user_id/profile', to: 'pages#profile', as: 'user_profile'
   get 'sign', to: 'pages#sign'
   get 'cart', to: 'pages#cart'
+  get 'trxtable', to: 'pages#trxtable'
 end

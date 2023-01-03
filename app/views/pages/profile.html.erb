@@ -94,9 +94,7 @@
       <% end%>
     </div>
     <% if user_signed_in? && current_user.id==@user.id %>
-      <div class="btn text-4xl px-7 py-4 font-bold drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]">
-        <%= link_to "Create NFT", new_wallet_nft_path(@wallet),  class:"text-end"%>
-      </div>
+      <%= link_to "Create NFT", new_wallet_nft_path(@wallet),  class:"text-end btn text-4xl px-7 py-4 font-bold drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]"%>
     <% end %>
   </div>
   <div id="editprofile" class="hidden editprofile">
