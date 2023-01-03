@@ -13,7 +13,8 @@
           </div>
           <div class="minted text-sm font-medium text-grey2">Minted on <%= nft.created_at %></div>
           <div class="Current Owner text-sm font-medium text-grey2">Owned By: </div>
-          <% temp_user=User.find_by(username: nft.owner) %>
+          <% temp_wallet=Wallet.find(nft.wallet_id) %>
+          <% temp_user=User.find(temp_wallet.id) %>
           <% owner_wallet=temp_user.wallet %>
           <%= link_to nft.owner, user_profile_path(@wallet.user_id),class:"text-sm font-semibold truncate overflow-hidden"%>
         </div>
