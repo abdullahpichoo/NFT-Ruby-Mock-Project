@@ -5,9 +5,6 @@
     <li class = "text-2xl font-bold" >
       <%= link_to "FakeFT", root_path %>
     </li>
-    <%= form_with url: all_path, method: :get, data: {turbo_frame: "all_nfts"} do %>
-      <%= text_field_tag "search", nil, placeholder: "Search", class: "w-48 outline outline-1 outline-grey2 p-1.5 px-4 text-sm font-light text-grey2 rounded-3xl bg-transparent"%>
-    <% end %>
   </ul>
   <%# NavLinks and Icons %>
   <%# Explore %>

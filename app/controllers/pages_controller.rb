@@ -8,18 +8,18 @@ class PagesController < ApplicationController
   def nftshow; end
 
   def profile
-    User.exists?(id:params[:user_id])
-
-    if !User.exists?(id:params[:user_id])
-      redirect_to all_path,notice: "User does not exist anymore"
+    if !User.exists?(id: params[:user_id])
+      redirect_to all_path, notice: 'User does not exist anymore'
     else
-    @user=User.find(params[:user_id])
-    @wallet=Wallet.find(@user.wallet.id)
-    @nfts=@wallet.nfts.all
+      @user = User.find(params[:user_id])
+      @wallet = Wallet.find(@user.wallet.id)
+      @nfts = @wallet.nfts.all
     end
   end
 
   def sign; end
 
   def cart; end
+
+  def trxtable; end
 end

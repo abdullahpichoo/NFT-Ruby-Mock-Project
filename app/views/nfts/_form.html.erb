@@ -1,35 +1,41 @@
 <%= form_with(model: [@wallet,nft], html: { multipart: true }) do |form| %>
-  <% if nft.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(nft.errors.count, "error") %> prohibited this nft from being saved:</h2>
-      <ul>
-        <% nft.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="flex flex-col items-center text-[0.7rem] sm:text-xs font-medium lg:text-sm space-y-4 ">
+    <% if nft.errors.any? %>
+      <div class = "bg-red-600 w-full outline outline-1 outline-white py-3 rounded-3xl text-center">
+        <h2 class = "font-bold mb-2"><%= pluralize(nft.errors.count, "error") %> prohibited this nft from being saved:</h2>
+        <ul class= "space-y-1">
+          <% nft.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field flex items-center px-4 py-2 rounded-3xl space-x-2 outline outline-1 hover:outline-[#DF3C6C]">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 sm:w-6 sm:h-6 stroke-white">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+      </svg>
+      <%= form.text_field :name, autofocus: true, autocomplete: :off, placeholder: "NFT Name", class:"bg-transparent w-full focus:ring-0 border-0 focus:outline-none sm:text-xs font-medium lg:text-sm " %>
     </div>
-  <% end %>
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
-  </div>
-  <div>
-    <%= form.label :image %>
-    <%= form.file_field :images %>
-  </div>
-  <div>
-    <% form.label :owner, style: "display: block" %>
-    <%= form.hidden_field :owner ,value:current_user.username %>
-  </div>
-  <div>
-    <% form.label :created_by, style: "display: block" %>
-    <%= form.hidden_field :created_by,value: current_user.username %>
-  </div>
-  <div>
-    <%= form.submit %>
+    <div class="field flex items-center px-4 py-2 rounded-3xl space-x-2 outline outline-1 hover:outline-[#DF3C6C]">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 sm:w-6 sm:h-6 stroke-white">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <%= form.text_field :price, autofocus: true, autocomplete: :off, placeholder: "0", class:"bg-transparent w-full focus:ring-0 border-0 focus:outline-none sm:text-xs font-medium lg:text-sm  " %>
+    </div>
+    <div class="field flex items-center px-4 py-2 rounded-3xl space-x-2 outline outline-1 hover:outline-[#DF3C6C]">
+      <%= form.label :image %>
+      <%= form.file_field :images, class: "bg-transparent w-full focus:ring-0 border-0 focus:outline-none sm:text-xs font-medium lg:text-sm  " %>
+    </div>
+    <div>
+      <% form.label :owner, style: "display: block" %>
+      <%= form.hidden_field :owner ,value:current_user.username %>
+    </div>
+    <div>
+      <% form.label :created_by, style: "display: block" %>
+      <%= form.hidden_field :created_by,value: current_user.username %>
+    </div>
+    <div class="actions text-base sm:text-2xl text-white">
+      <%= form.submit "Create NFT", class: "btn bg-[#DF3C6C] px-5 py-2" %>
+    </div>
   </div>
 <% end %>

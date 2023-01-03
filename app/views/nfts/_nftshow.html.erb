@@ -17,7 +17,7 @@
           <% owner_wallet=temp_user.wallet %>
           <%= link_to nft.owner, user_profile_path(@wallet.user_id),class:"text-sm font-semibold truncate overflow-hidden"%>
         </div>
-        <div class="buy-details space-y-2 outline outline-1 outline-grey2 p-3 rounded-2xl">
+        <div class="buy-details px-5 space-y-2 outline outline-1 outline-grey2 p-3 rounded-2xl">
           <div class="price text-sm font-medium text-grey2">Current Price:</div>
           <%= turbo_frame_tag "price" do %>
             <div class="text-3xl font-bold"><%= nft.price %> ETH</div>
@@ -25,19 +25,15 @@
           <div class="grid gap-3">
             <% if current_user.id!=@wallet.user_id %>
               <%# Buy form %>
-              <div class="btn text-2xl sm:text-2xl md:text-xl w-full text-center py-3 drop-shadow-[0_7px_50px_rgba(255,255,255,0.3)]">
-                <%= form_with(url: buy_nft_path) do |f| %>
-                  <%= f.hidden_field :id, value: @nft.id %>
-                  <%= f.submit "Buy Now" %>
-                <% end %>
-              </div>
+              <%= form_with(url: buy_nft_path) do |f| %>
+                <%= f.hidden_field :id, value: @nft.id %>
+                <%= f.submit "Buy Now", class: "btn bg-[#DF3C6C] text-2xl sm:text-2xl md:text-xl w-full text-center py-3 drop-shadow-[0_7px_50px_rgba(255,255,255,0.3)]" %>
+              <% end %>
               <%# Cart add form %>
-              <div class="btn-outline text-2xl sm:text-2xl md:text-xl w-full text-center py-3 drop-shadow-[0_7px_50px_rgba(255,255,255,0.3)]">
-                <%= form_with(url: cart_add_path) do |f| %>
-                  <%= f.hidden_field :id, value: @nft.id %>
-                  <%= f.submit "Add to Cart" %>
-                <% end %>
-              </div>
+              <%= form_with(url: cart_add_path) do |f| %>
+                <%= f.hidden_field :id, value: @nft.id %>
+                <%= f.submit "Add to Cart", class:"btn-outline text-2xl sm:text-2xl md:text-xl w-full text-center py-3" %>
+              <% end %>
             <% else %>
               <%# edit price form %>
               <%= form_with(url: wallet_nft_path(@wallet,@nft),method: :patch,data:{ turbo_frame: "price"} ) do |f| %>
