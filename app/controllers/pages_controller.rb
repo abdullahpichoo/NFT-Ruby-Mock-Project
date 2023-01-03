@@ -1,7 +1,11 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user!,only: %i[profile]
+
   def home; end
 
-  def homepage; end
+  def homepage
+    @top_picks = Nft.order(Arel.sql('RANDOM()')).limit(3)
+  end
 
   def explore; end
 

@@ -4,7 +4,7 @@ class WalletsController < ApplicationController
 
   def buy_all
     if current_user.wallet.balance < @cart.total
-      redirect_to all_path, notice: 'Invalid balance'
+      redirect_to all_path, alert: 'Insufficient balance'
     else
       check = false
       @cart.orderables.each do |order|
@@ -19,11 +19,10 @@ class WalletsController < ApplicationController
   end
 
   def buy_nft
-    redirect_to all_path, notice: 'Wallet is not created' if current_user.wallet.nil? # #not working idk
     if helpers.buy?(params[:id])
       redirect_to all_path, notice: 'Purchase successful'
     else
-      redirect_to all_path, notice: 'Invalid balance'
+      redirect_to all_path, alert: 'Insufficient balance'
     end
   end
 
