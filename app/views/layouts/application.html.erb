@@ -15,10 +15,9 @@
     <div class="background-elements z-0">
       <%= image_tag "Ellipse 1.png", class: "absolute top-0 left-0 w-1/2" %>
       <%# <%= render 'partials/bg-elements' %>
-      <p style="color: green" class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
     </div>
     <main class="mx-10 my-5 flex flex-col relative z-20 min-h-[100vh]">
+      <%= render 'partials/flash' %>
       <%= render 'partials/nav' %>
       <div class="flex-[1]">
         <%= yield %>

@@ -32,10 +32,16 @@
     <div class="image h-[8rem] w-[100%] sm:h-[10rem] lg:h-[12rem]">
       <%= image_tag "cover.jpg", class: "object-cover w-full h-full rounded-[2rem]" %>
     </div>
-    <div class="profile w-24 absolute mt-[3.5rem] left-[39%]
+    <%# <div class="profile w-24 absolute mt-[3.5rem] left-[39%]
       sm:w-40 sm:left-[40%] sm:mt-[3rem]
       md:w-44 md:left-[42%] md:mt-[2.5rem]
       lg:w-48 ls:left-[44%] lg:mt-[3rem]">
+      <%= image_tag "profile.jpg", class: "rounded-full outline outline-1"%>
+    <%# </div> %>
+    <div class="profile w-24 mt-[3.5rem] absolute left-[50%] translate-x-[-50%]
+      sm:w-40 sm:mt-[3rem]
+      md:w-44 md:mt-[2.5rem]
+      lg:w-48 lg:mt-[3rem]">
       <%= image_tag "profile.jpg", class: "rounded-full outline outline-1"%>
     </div>
     <div class="usernamedetails text-center max-w-[60%] mt-[2rem] sm:mt-[3.5rem] md:mt-[4.5rem]">
@@ -44,7 +50,7 @@
       sm:text-xl md:text-2xl ">
         <div class="balance text-center max-w-[33%] ">
           Balance
-          <div class="flex items-center gap-2">
+          <div class="flex flex-col sm:flex-row items-center gap-2">
             <%= turbo_frame_tag "wallet_balance" do %>
               <div class="amount text-white font-bold truncate">
                 <%= @wallet.balance %> ETH

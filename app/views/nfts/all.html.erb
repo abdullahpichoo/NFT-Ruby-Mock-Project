@@ -6,12 +6,24 @@
     </div>
     <div class="flex space-x-4">
       <% if @top_picks.count == 0%>
-        <%= render 'partials/card' %>
-        <%= render 'partials/card' %>
-        <%= render 'partials/card' %>
+        <div class="card"><%= render 'partials/card' %></div>
+        <div class="card hidden md:block"><%= render 'partials/card' %></div>
+        <div class="card hidden xl:block"><%= render 'partials/card' %></div>
       <% else %>
+        <% i = 0 %>
         <% @top_picks.each do |t| %>
-          <%= render t %>
+          <% if i == 0 %>
+            <%= render t %>
+          <% elsif i == 1 %>
+            <div class="card hidden md:block">
+              <%= render t %>
+            </div>
+          <% elsif i == 2 %>
+            <div class="card hidden xl:block">
+              <%= render t %>
+            </div>
+          <% end %>
+          <% i+=1 %>
         <% end %>
       <% end %>
     </div>
@@ -53,6 +65,8 @@
         <% end %>
       <% end %>
     </div>
-    <%== pagy_nav(@pagy,link_extra: 'data-turbo-action="advance"') %>
+    <div class="text-center mt-5">
+      <%== pagy_nav(@pagy,link_extra: 'data-turbo-action="advance"') %>
+    </div>
   <% end %>
 </article>
