@@ -13,7 +13,7 @@ class NftsController < ApplicationController
 
   # GET /nfts or /nfts.json
   def index
-    redirect_to transactions_path, notice: 'User does not exist' if @wallet.nil?
+    redirect_to transactions_path, alert: 'User Does Not Exist' if @wallet.nil?
     @nfts = @wallet.nfts.all
   end
 
@@ -82,6 +82,6 @@ class NftsController < ApplicationController
   def check_wallet
     return if Wallet.exists?(params[:wallet_id])
 
-    redirect_to all_path, notice: 'Nft not found'
+    redirect_to all_path, alert: 'Nft not found'
   end
 end

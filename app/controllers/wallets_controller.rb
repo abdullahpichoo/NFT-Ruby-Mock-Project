@@ -15,12 +15,12 @@ class WalletsController < ApplicationController
 
     return unless check
 
-    redirect_to all_path, notice: 'Purchase successful'
+    redirect_to all_path, notice: 'Purchase Successful'
   end
 
   def buy_nft
     if helpers.buy?(params[:id])
-      redirect_to all_path, notice: 'Purchase successful'
+      redirect_to all_path, notice: 'Purchase Successful'
     else
       redirect_to all_path, alert: 'Insufficient balance'
     end
