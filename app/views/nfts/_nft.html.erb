@@ -8,7 +8,8 @@
         <div class="flex flex-col max-w-[70%]">
           <div class="text-lg sm:text-xl font-bold truncate overflow-hidden"><%= nft.name %></div>
           <div class="text-xs sm:text-sm text-grey2 font-medium">
-            <% temp_user=User.find_by(username: nft.owner) %>
+            <% temp_wallet=Wallet.find(nft.wallet_id) %>
+            <% temp_user=User.find(temp_wallet.id) %>
             <% owner_wallet=temp_user.wallet %>
             <%= link_to nft.owner, user_profile_path(temp_user) %>
           </div>

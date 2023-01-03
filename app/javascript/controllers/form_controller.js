@@ -6,9 +6,9 @@ export default class extends Controller {
   // initialize() {
   //   this.submit = debounce(this.submit.bind(this), 300);
   // }
-  submit() {
-    this.element.requestSubmit();
-  }
+  // submit() {
+  //   this.element.requestSubmit();
+  // }
   registerAnimation() {
     // Hide Login Animation and Form
     const loginbtn = document.getElementById("loginbtn");

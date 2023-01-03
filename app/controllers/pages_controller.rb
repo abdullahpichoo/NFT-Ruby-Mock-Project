@@ -1,7 +1,11 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user!,only: %i[profile]
+
   def home; end
 
-  def homepage; end
+  def homepage
+    @top_picks = Nft.order(Arel.sql('RANDOM()')).limit(3)
+  end
 
   def explore; end
 
@@ -9,7 +13,7 @@ class PagesController < ApplicationController
 
   def profile
     if !User.exists?(id: params[:user_id])
-      redirect_to all_path, notice: 'User does not exist anymore'
+      redirect_to all_path, alert: 'User Does Not Exist Anymore'
     else
       @user = User.find(params[:user_id])
       @wallet = Wallet.find(@user.wallet.id)

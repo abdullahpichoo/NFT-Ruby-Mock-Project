@@ -8,20 +8,18 @@ class NftsController < ApplicationController
     filtered = Nft.where('name LIKE ?', "%#{params[:filter]}%").all
     @transactions = Transaction.order('transaction_time desc').limit(4)
     @top_picks = Nft.order(Arel.sql('RANDOM()')).limit(3)
-    @pagy, @nfts = pagy(filtered.all, items: 10)
+    @pagy, @nfts = pagy(filtered.all, items: 8)
   end
 
   # GET /nfts or /nfts.json
   def index
-    redirect_to transactions_path, notice: 'User does not exist' if @wallet.nil?
+    redirect_to transactions_path, alert: 'User Does Not Exist' if @wallet.nil?
     @nfts = @wallet.nfts.all
   end
 
   # GET /nfts/1 or /nfts/1.json
   def show
-    @user = User.find_by(username: @nft.owner)
-    @owner_wallet = @user.wallet
-    @owner_nfts = @owner_wallet.nfts.all
+    @owner_nfts = @wallet.nfts.all
   end
 
   # GET /nfts/new
@@ -84,6 +82,6 @@ class NftsController < ApplicationController
   def check_wallet
     return if Wallet.exists?(params[:wallet_id])
 
-    redirect_to all_path, notice: 'Nft not found'
+    redirect_to all_path, alert: 'Nft not found'
   end
 end
