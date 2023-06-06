@@ -7,7 +7,7 @@ class NftsController < ApplicationController
   def all
     filtered = Nft.where('name LIKE ?', "%#{params[:filter]}%").all
     @transactions = Transaction.order('transaction_time desc').limit(4)
-    @top_picks = Nft.order(Arel.sql('RANDOM()')).limit(3)
+    @top_picks = Nft.all.sample(3)
     @pagy, @nfts = pagy(filtered.all, items: 10)
   end
 
@@ -74,7 +74,7 @@ class NftsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def nft_params
-    params.require(:nft).permit(:name, :price, :created_by, :wallet_id, :owner, :images)
+    params.require(:nft).permit(:name, :price, :created_by, :wallet_id, :owner, :image)
   end
 
   def get_wallet

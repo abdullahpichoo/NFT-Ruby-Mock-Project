@@ -1,7 +1,7 @@
 <div id="<%= dom_id nft %>">
   <div class="card p-4 bg-[#1e1e1e] w-60 h-80 rounded-3xl sm:w-72">
     <div class="card-image w-52 pb-[95%] sm:w-64 sm:pb-[78%] relative">
-      <%=image_tag nft.images_url(:thumb), class: "absolute top-0 h-48 w-[100%] object-cover rounded-2xl hover:-top-1 duration-150 transition-all" %>
+      <%=image_tag nft.image, class: "absolute top-0 h-48 w-[100%] object-cover rounded-2xl hover:-top-1 duration-150 transition-all" %>
     </div>
     <div class="card-details mx-0.5">
       <div class="name-and-price flex justify-between items-center">

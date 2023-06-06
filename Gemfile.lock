@@ -343,6 +343,7 @@ DEPENDENCIES
   gravatar_image_tag
   guard-livereload (~> 2.5, >= 2.5.2)
   htmlbeautifier
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   pagy

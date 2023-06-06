@@ -2,7 +2,6 @@
   <div class="flex flex-col items-center text-[0.7rem] sm:text-xs font-medium lg:text-sm space-y-4 ">
     <% if nft.errors.any? %>
       <div class = "bg-red-600 w-full outline outline-1 outline-white py-3 rounded-3xl text-center">
-        <h2 class = "font-bold mb-2"><%= pluralize(nft.errors.count, "error") %> prohibited this nft from being saved:</h2>
         <ul class= "space-y-1">
           <% nft.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -23,16 +22,16 @@
       <%= form.text_field :price, autofocus: true, autocomplete: :off, placeholder: "0", class:"bg-transparent w-full focus:ring-0 border-0 focus:outline-none sm:text-xs font-medium lg:text-sm  " %>
     </div>
     <div class="field flex items-center px-4 py-2 rounded-3xl space-x-2 outline outline-1 hover:outline-[#DF3C6C]">
-      <%= form.label :image %>
-      <%= form.file_field :images, class: "bg-transparent w-full focus:ring-0 border-0 focus:outline-none sm:text-xs font-medium lg:text-sm  " %>
+      <%# <%= form.label :image %>
+      <%= form.file_field :image, accept: ".jpg, .jpeg, .png", class: "bg-transparent w-full focus:ring-0 border-0 focus:outline-none sm:text-xs font-medium lg:text-sm  " %>
     </div>
     <div>
       <% form.label :owner, style: "display: block" %>
-      <%= form.hidden_field :owner ,value:current_user.username %>
+      <%= form.hidden_field :owner , value:current_user.username %>
     </div>
     <div>
       <% form.label :created_by, style: "display: block" %>
-      <%= form.hidden_field :created_by,value: current_user.username %>
+      <%= form.hidden_field :created_by, value: current_user.username %>
     </div>
     <div class="actions text-base sm:text-2xl text-white">
       <%= form.submit "Create NFT", class: "btn bg-[#DF3C6C] px-5 py-2" %>
