@@ -1,7 +1,12 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user!, except: %i[home homepage explore sign cart trxtable]
   def home; end
 
-  def homepage; end
+  def homepage
+    if Nft.count >= 3
+      @hot_items = Nft.all.sample(3)
+    end
+  end
 
   def explore; end
 

@@ -34,7 +34,8 @@ class NftsController < ApplicationController
 
   # POST /nfts or /nfts.json
   def create
-    @nft = @wallet.nfts.new(nft_params)
+    @nft = @wallet.nfts.
+                        new(nft_params.merge(created_by: current_user.username, owner: current_user.username))
 
     respond_to do |format|
       if @nft.save

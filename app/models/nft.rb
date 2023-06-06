@@ -10,5 +10,6 @@ class Nft < ApplicationRecord
 
   has_many :carts, through: :orderables
   has_many :orderables, dependent: :destroy
+
   belongs_to :wallet
 end

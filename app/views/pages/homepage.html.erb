@@ -78,14 +78,25 @@
   <article class = "flex flex-col items-center space-y-10">
     <h2 class= "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Hot Items</h2>
     <div class="cards space-y-4 sm:flex space-x-4 sm:space-y-0">
-      <%= render 'partials/card' %>
-      <%= render 'partials/card' %>
-      <div class="hidden lg:block">
-        <%= render 'partials/card' %>
-      </div>
+      <% if @hot_items.count == 0%>
+        <div class="card"><%= render 'partials/card' %></div>
+        <div class="card hidden md:block"><%= render 'partials/card' %></div>
+        <div class="card hidden xl:block"><%= render 'partials/card' %></div>
+      <% else %>
+        <% i = 0 %>
+        <% @hot_items.each do |t| %>
+          <% if i == 0 || i == 1 %>
+            <%= render t %>
+          <% elsif i == 2 %>
+            <div class="hidden lg:block">
+              <%= render t %>
+            </div>
+          <% end %>
+          <% i+=1 %>
+        <% end %>
+      <% end %>
     </div>
-    <div class="btn text-2xl sm:text-3xl md:text-4xl lg:py-5 py-3 px-5 self-center sm:text-3xl drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]">
-
+    <div class="btn text-2xl sm:text-3xl md:text-4xl lg:py-5 py-3 px-5 self-center drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]">
       <%= link_to "Explore", all_path %>
     </div>
   </article>
