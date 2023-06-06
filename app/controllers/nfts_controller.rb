@@ -7,21 +7,21 @@ class NftsController < ApplicationController
   def all
     filtered = Nft.where('name LIKE ?', "%#{params[:filter]}%").all
     @transactions = Transaction.order('transaction_time desc').limit(4)
-    @top_picks = Nft.all.sample(3)
+    @top_picks = Nft.all.includes(:image_attachment).sample(3)
     @pagy, @nfts = pagy(filtered.all, items: 10)
   end
 
   # GET /nfts or /nfts.json
   def index
     redirect_to transactions_path, notice: 'User does not exist' if @wallet.nil?
-    @nfts = @wallet.nfts.all
+    @nfts = @wallet.nfts.all.includes(:image_attachment)
   end
 
   # GET /nfts/1 or /nfts/1.json
   def show
     @user = User.find_by(username: @nft.owner)
     @owner_wallet = @user.wallet
-    @owner_nfts = @owner_wallet.nfts.all
+    @owner_nfts = @owner_wallet.nfts.all.includes(:image_attachment)
   end
 
   # GET /nfts/new

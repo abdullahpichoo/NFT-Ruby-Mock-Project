@@ -8,7 +8,7 @@ class WalletsController < ApplicationController
     else
       check = false
       @cart.orderables.each do |order|
-        check = helpers.buy?(order.nft)
+        check = helpers.buy?(order.nft.id)
         Orderable.find(order.id).destroy
       end
     end
