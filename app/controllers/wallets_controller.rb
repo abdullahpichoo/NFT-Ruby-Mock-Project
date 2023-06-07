@@ -5,25 +5,21 @@ class WalletsController < ApplicationController
   def buy_all
     if current_user.wallet.balance < @cart.total
       redirect_to all_path, alert: 'Insufficient Balance!'
+    elsif helpers.buy_all?
+      redirect_to all_path, notice: 'Purchase successful'
     else
-      check = false
-      @cart.orderables.each do |order|
-        check = helpers.buy?(order.nft.id)
-        Orderable.find(order.id).destroy
-      end
+      redirect_to all_path, notice: 'Purchase failed'
     end
 
-    return unless check
-
-    redirect_to all_path, notice: 'Purchase successful'
   end
+
 
   def buy_nft
     redirect_to all_path, notice: 'Wallet is not created' if current_user.wallet.nil? # #not working idk
     if helpers.buy?(params[:id])
       redirect_to all_path, notice: 'Purchase successful'
     else
-      redirect_to all_path, notice: 'Insufficient Balance!'
+      redirect_to all_path, alert: 'Insufficient Balance!'
     end
   end
 
@@ -88,4 +84,6 @@ class WalletsController < ApplicationController
   def wallet_params
     params.require(:wallet).permit(:balance, :items_sold, :earnings, :user_id)
   end
+
+ 
 end

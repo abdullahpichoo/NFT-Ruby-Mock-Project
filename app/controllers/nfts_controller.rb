@@ -5,8 +5,8 @@ class NftsController < ApplicationController
   before_action :set_nft, only: %i[show edit update destroy]
 
   def all
-    filtered = Nft.where('name LIKE ?', "%#{params[:filter]}%").all
-    @transactions = Transaction.order('transaction_time desc').limit(4)
+    filtered = Nft.all.includes(:image_attachment).where('name LIKE ?', "%#{params[:filter]}%")
+    @transactions = Transaction.order(created_at: :desc).limit(4)
     @top_picks = Nft.all.includes(:image_attachment).sample(3)
     @pagy, @nfts = pagy(filtered.all, items: 10)
   end

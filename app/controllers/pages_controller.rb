@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 
   def homepage
     if Nft.count >= 3
-      @hot_items = Nft.all.includes(:image_attachment).sample(3)
+      @hot_items = Nft.all.includes(:image_attachment, :wallet).sample(3)
     end
   end
 
