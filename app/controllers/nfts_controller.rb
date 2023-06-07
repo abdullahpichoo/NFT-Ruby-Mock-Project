@@ -34,9 +34,8 @@ class NftsController < ApplicationController
 
   # POST /nfts or /nfts.json
   def create
-    @nft = @wallet.nfts.
-                        new(nft_params.merge(created_by: current_user.username, owner: current_user.username))
-
+    @nft = @wallet.nfts.new(nft_params.merge(created_by: current_user.username, owner: current_user.username))
+    optimize_and_attach_image
     respond_to do |format|
       if @nft.save
         format.html { redirect_to wallet_nft_path(@wallet, @nft), notice: 'Nft was successfully created.' }
@@ -65,6 +64,23 @@ class NftsController < ApplicationController
   def destroy; end
 
   private
+
+  def optimize_and_attach_image
+    # Load the image using ImageProcessing gem
+    image = ImageProcessing::Vips.source(params[:nft][:image])
+
+    # Optimize the image (e.g., resize, compress, etc.) using ImageProcessing methods
+    optimized_image = image.convert('jpeg')
+                           .saver(subsample_mode: 'on', strip: true, interlace: true, quality: 70)
+                           .call
+
+    # # Generate a unique filename by concatenating the current time with the original filename
+    current_time = Time.now.strftime('%Y%m%d%H%M%S')
+    new_filename = "#{current_time}_#{@nft.name}_image"
+
+    # Attach the optimized image to the user's profile picture attachment
+    @nft.image.attach(io: optimized_image,filename: new_filename)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_nft
