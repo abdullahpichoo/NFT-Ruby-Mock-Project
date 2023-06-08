@@ -84,6 +84,5 @@ class WalletsController < ApplicationController
   def wallet_params
     params.require(:wallet).permit(:balance, :items_sold, :earnings, :user_id)
   end
-
  
 end

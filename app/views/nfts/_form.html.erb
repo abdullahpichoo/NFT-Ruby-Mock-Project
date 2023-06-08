@@ -1,4 +1,4 @@
-<%= form_with(model: [@wallet,nft], html: { multipart: true }) do |form| %>
+<%= form_with(model: [@wallet,nft], html: { multipart: true }, data: {controller: "spinner", action: "submit->spinner#show"} )do |form| %>
   <div class="flex flex-col items-center text-[0.7rem] sm:text-xs font-medium lg:text-sm space-y-4 ">
     <% if nft.errors.any? %>
       <div class = "bg-red-600 w-full outline outline-1 outline-white py-3 rounded-3xl text-center">
@@ -24,8 +24,16 @@
     <div class="field flex items-center px-4 py-2 rounded-3xl space-x-2 outline outline-1 hover:outline-[#DF3C6C]">
       <%= form.file_field :image, accept: ".jpg, .jpeg, .png", class: "bg-transparent w-full focus:ring-0 border-0 focus:outline-none sm:text-xs font-medium lg:text-sm  " %>
     </div>
-    <div class="actions text-base sm:text-2xl text-white">
+    <div id = "submit-btn" class="submit-btn text-base sm:text-2xl text-white">
       <%= form.submit "Create NFT", class: "btn bg-[#DF3C6C] px-5 py-2" %>
+    </div>
+    <div id = "spinner" class="spinner hidden flex gap-2 items-center text-base sm:text-2xl text-white btn bg-[#DF3C6C] px-5 py-2 opacity-80">
+      <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+        <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+          Loading...
+        </span>
+      </div>
+      Creating NFT...
     </div>
   </div>
 <% end %>
