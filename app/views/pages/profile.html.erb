@@ -53,10 +53,10 @@
           <div class="flex flex-col sm:flex-row items-center gap-2">
             <%= turbo_frame_tag "wallet_balance" do %>
               <div class="amount text-white font-bold truncate">
-                <%= @wallet.balance %> ETH
+                <%= @user.wallet.balance %> ETH
               </div>
             <% end %>
-            <% if @wallet.id == current_user.wallet.id %>
+            <% if @user.wallet.id == current_user.wallet.id %>
               <%= form_with(url: wallet_path(current_user.wallet), method: :put,data:{ turbo_frame: "price"}) do |f|%>
                 <%= f.hidden_field :balance, value:1 %>
                 <%= f.submit "+" , class: "cursor-pointer text-white px-2.5 py-0.5 bg-[#DF3C6C] w-fit font-semibold rounded-full cursor-pointer duration-200 transition-all;"%>
@@ -67,12 +67,12 @@
         <div class="earnings text-center max-w-[33%]">
           Earnings
           <div class="amount  text-white font-bold  truncate">
-            <%= @wallet.earnings %>ETH</div>
+            <%= @user.wallet.earnings %>ETH</div>
         </div>
         <div class="sold text-center max-w-[33%]">
           Sales
           <div class="amount  text-white font-bold  truncate">
-            <%= @wallet.items_sold%></div>
+            <%= @user.wallet.items_sold%></div>
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
       <% end%>
     </div>
     <% if user_signed_in? && current_user.id==@user.id %>
-      <%= link_to "Create NFT", new_wallet_nft_path(@wallet),  class:"text-end btn text-4xl px-7 py-4 font-bold drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]"%>
+      <%= link_to "Create NFT", new_wallet_nft_path(@user.wallet),  class:"text-end btn text-4xl px-7 py-4 font-bold drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]"%>
     <% end %>
   </div>
   <div id="editprofile" class="hidden editprofile">
