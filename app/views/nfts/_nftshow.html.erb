@@ -13,7 +13,8 @@
           </div>
           <div class="minted text-sm font-medium text-grey2">Minted on <%= nft.created_at %></div>
           <div class="Current Owner text-sm font-medium text-grey2">Owned By: </div>
-          <% temp_user=User.find_by(username: nft.owner) %>
+          <% temp_wallet=Wallet.find(nft.wallet_id) %>
+          <% temp_user=User.find(temp_wallet.id) %>
           <% owner_wallet=temp_user.wallet %>
           <%= link_to nft.owner, user_profile_path(@wallet.user_id),class:"text-sm font-semibold truncate overflow-hidden"%>
         </div>
@@ -38,7 +39,9 @@
               <%# edit price form %>
               <%= form_with(url: wallet_nft_path(@wallet,@nft),method: :patch,data:{ turbo_frame: "price"} ) do |f| %>
                 <div class="grid  gap-4">
+
                   <%= f.number_field :price, placeholder:"Price", min: 1, max:100, step: 0.01, required: true, class:"text-lg w-full bg-transparent px-5 py-3 rounded-3xl space-x-2 outline outline-1 focus:ring-0 focus:border-0 focus:outline-[#DF3C6C] hover:outline-[#DF3C6C]"%>
+
                   <%= f.submit "Edit Price", class:"btn text-2xl sm:text-2xl md:text-xl w-full text-center py-3 drop-shadow-[0_7px_50px_rgba(255,255,255,0.3)]
                     bg-[#DF3C6C] font-semibold rounded-full cursor-pointer duration-200 transition-all" %>
                 </div>

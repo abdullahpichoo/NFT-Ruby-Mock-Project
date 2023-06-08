@@ -101,6 +101,6 @@ class NftsController < ApplicationController
   def check_wallet
     return if Wallet.exists?(params[:wallet_id])
 
-    redirect_to all_path, notice: 'Nft not found'
+    redirect_to all_path, alert: 'Nft not found'
   end
 end

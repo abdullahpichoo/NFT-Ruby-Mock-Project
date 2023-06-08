@@ -10,14 +10,12 @@ class WalletsController < ApplicationController
     else
       redirect_to all_path, notice: 'Purchase failed'
     end
-
   end
 
 
   def buy_nft
-    redirect_to all_path, notice: 'Wallet is not created' if current_user.wallet.nil? # #not working idk
     if helpers.buy?(params[:id])
-      redirect_to all_path, notice: 'Purchase successful'
+      redirect_to all_path, notice: 'Purchase Successful'
     else
       redirect_to all_path, alert: 'Insufficient Balance!'
     end

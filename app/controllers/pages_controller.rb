@@ -14,7 +14,7 @@ class PagesController < ApplicationController
 
   def profile
     if !User.exists?(id: params[:user_id])
-      redirect_to all_path, notice: 'User does not exist anymore'
+      redirect_to all_path, alert: 'User Does Not Exist Anymore'
     else
       @user = User.find(params[:user_id])
       @wallet = Wallet.find(@user.wallet.id)
