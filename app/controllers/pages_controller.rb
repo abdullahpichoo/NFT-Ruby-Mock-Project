@@ -1,10 +1,11 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!,only: %i[profile]
-
+  before_action :authenticate_user!, except: %i[home homepage explore sign cart trxtable]
   def home; end
 
   def homepage
-    @top_picks = Nft.order(Arel.sql('RANDOM()')).limit(3)
+    if Nft.count >= 3
+      @hot_items = Nft.all.includes(:image_attachment, :wallet).sample(3)
+    end
   end
 
   def explore; end
@@ -17,7 +18,7 @@ class PagesController < ApplicationController
     else
       @user = User.find(params[:user_id])
       @wallet = Wallet.find(@user.wallet.id)
-      @nfts = @wallet.nfts.all
+      @nfts = @wallet.nfts.all.includes(:image_attachment)
     end
   end
 

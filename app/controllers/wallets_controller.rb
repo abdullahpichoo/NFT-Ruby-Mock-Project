@@ -1,28 +1,23 @@
 class WalletsController < ApplicationController
-  before_action :set_wallet, only: %i[show edit update destroy]
+  before_action :wallet, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   def buy_all
     if current_user.wallet.balance < @cart.total
-      redirect_to all_path, alert: 'Insufficient balance'
+      redirect_to all_path, alert: 'Insufficient Balance!'
+    elsif helpers.buy_all?
+      redirect_to all_path, notice: 'Purchase successful'
     else
-      check = false
-      @cart.orderables.each do |order|
-        check = helpers.buy?(order.nft.id)
-        Orderable.find(order.id).destroy
-      end
+      redirect_to all_path, notice: 'Purchase failed'
     end
-
-    return unless check
-
-    redirect_to all_path, notice: 'Purchase Successful'
   end
+
 
   def buy_nft
     if helpers.buy?(params[:id])
       redirect_to all_path, notice: 'Purchase Successful'
     else
-      redirect_to all_path, alert: 'Insufficient balance'
+      redirect_to all_path, alert: 'Insufficient Balance!'
     end
   end
 
@@ -79,12 +74,13 @@ class WalletsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_wallet
-    @wallet = current_user.wallet
+  def wallet
+    @wallet ||= current_user.wallet
   end
 
   # Only allow a list of trusted parameters through.
   def wallet_params
     params.require(:wallet).permit(:balance, :items_sold, :earnings, :user_id)
   end
+ 
 end
