@@ -70,8 +70,8 @@ class NftsController < ApplicationController
     image = ImageProcessing::Vips.source(params[:nft][:image])
 
     # Optimize the image (e.g., resize, compress, etc.) using ImageProcessing methods
-    optimized_image = image.convert('jpeg')
-                           .saver(subsample_mode: 'on', strip: true, interlace: true, quality: 70)
+    optimized_image = image.resize_to_fit(800,800).convert('jpeg')
+                           .saver(subsample_mode: 'on', strip: true, interlace: true, quality: 50)
                            .call
 
     # # Generate a unique filename by concatenating the current time with the original filename
