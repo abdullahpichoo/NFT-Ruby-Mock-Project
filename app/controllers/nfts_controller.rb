@@ -5,10 +5,10 @@ class NftsController < ApplicationController
   before_action :set_nft, only: %i[show edit update destroy]
 
   def all
-    filtered = Nft.all.includes(:image_attachment).where('name LIKE ?', "%#{params[:filter]}%")
+    filtered = Nft.all.includes(:image_attachment).where('name LIKE ?', "%#{params[:filter]}%").where.not(wallet_id: current_user&.wallet&.id)
     @transactions = Transaction.order(created_at: :desc).limit(4)
-    @top_picks = Nft.all.includes(:image_attachment).sample(3)
-    @pagy, @nfts = pagy(filtered.all, items: 10)
+    @top_picks = Nft.all.includes(:image_attachment).where.not(wallet_id: current_user&.wallet&.id).sample(3)
+    @pagy, @nfts = pagy(filtered.all, items: 12)
   end
 
   # GET /nfts or /nfts.json

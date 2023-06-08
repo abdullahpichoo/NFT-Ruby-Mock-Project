@@ -54,15 +54,7 @@
   <%= turbo_frame_tag "nfts" do %>
     <div class="all-nfts grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-4">
       <% @nfts.each do |nft| %>
-        <%# do not show my nfts in all if signed in %>
-        <% if user_signed_in? && !current_user.wallet.nil?%>
-          <% if nft.wallet_id != current_user.wallet.id %>
-            <%= render nft %>
-          <% end %>
-          <%# Show all %>
-        <% else %>
-          <%= render nft %>
-        <% end %>
+        <%= render nft %>
       <% end %>
     </div>
     <div class="text-center mt-5">

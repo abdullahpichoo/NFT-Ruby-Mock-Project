@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 
   def homepage
     if Nft.count >= 3
-      @hot_items = Nft.all.includes(:image_attachment, :wallet).sample(3)
+      @hot_items = Nft.all.includes(:image_attachment, :wallet).where.not(wallet_id: current_user&.wallet&.id).sample(3)
     end
   end
 
@@ -17,8 +17,7 @@ class PagesController < ApplicationController
       redirect_to all_path, alert: 'User Does Not Exist Anymore'
     else
       @user = User.find(params[:user_id])
-      @wallet = Wallet.find(@user.wallet.id)
-      @nfts = @wallet.nfts.all.includes(:image_attachment)
+      @nfts = @user.wallet.nfts.all.includes(:image_attachment)
     end
   end
 
