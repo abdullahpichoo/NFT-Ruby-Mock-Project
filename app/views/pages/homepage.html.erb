@@ -47,7 +47,7 @@
         <%# Get Started Button (on Tablet & Desktop) %>
         <div class="hidden lg:block btn text-4xl py-5 px-5 self-center 
         sm:text-3xl md:text-4xl xl:drop-shadow-[-20px_7px_150px_rgba(255,255,255,0.7)]">
-          <%= link_to "Get Started", new_user_registration_path %>
+          <%= link_to "Get Started", sign_path %>
         </div>
       </div>
       <div class="hidden xl:hidden lg:block face-image w-80 drop-shadow-[-22px_-5px_111px_rgba(255,255,255,0.25)] hover:scale-105 transition-all duration-200"  >
@@ -56,7 +56,7 @@
     </div>
     <%# Get Started Button %>
     <div class="lg:hidden btn text-2xl py-3 px-5 self-center sm:text-3xl md:text-4xl">
-      <%= link_to "Get Started", new_user_registration_path %>
+      <%= link_to "Get Started", sign_path %>
     </div>
   </article>
   <%# Face Image %>
@@ -97,7 +97,7 @@
       <% end %>
     </div>
     <div class="btn text-2xl sm:text-3xl md:text-4xl lg:py-5 py-3 px-5 self-center sm:text-3xl drop-shadow-[0_7px_100px_rgba(255,255,255,0.7)]">
-    <%= link_to "Explore", all_path %>
-  </div>
+      <%= link_to "Explore", all_path %>
+    </div>
   </article>
 </main>
