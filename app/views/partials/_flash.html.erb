@@ -1,13 +1,13 @@
 <%= content_tag(:div, "",class:"absolute left-[50%] translate-x-[-50%]", data:{controller: "flash"}) do %>
   <% if notice %>
-    <div class="animate-bounce w-full outline outline-1 outline-white bg-green-600 hover:bg-green-700 rounded-3xl text-lg font-semibold px-5 py-3">
+    <div class="animate-bounce w-full outline outline-1 outline-white bg-green-600 hover:bg-green-700 rounded-3xl text-sm md:text-lg font-semibold px-5 py-3">
       <p>
         <%= notice %>
       </p>
     </div>
   <% end %>
   <% if alert %>
-    <div class="animate-bounce w-full outline outline-1 outline-white bg-red-600 hover:bg-green-700 rounded-3xl text-lg font-semibold px-5 py-3">
+    <div class="animate-bounce w-full outline outline-1 outline-white bg-red-600 hover:bg-green-700 rounded-3xl text-sm md:text-lg font-semibold px-5 py-3">
       <p>
         <%= alert %>
       </p>
