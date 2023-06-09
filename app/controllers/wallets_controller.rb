@@ -21,9 +21,6 @@ class WalletsController < ApplicationController
     end
   end
 
-  # GET /wallets/1 or /wallets/1.json
-  def show; end
-
   # GET /wallets/new
   def new
     @wallet = current_user.build_wallet
@@ -49,16 +46,14 @@ class WalletsController < ApplicationController
 
   # PATCH/PUT /wallets/1 or /wallets/1.json
   def update
-    value = params[:balance].to_i + current_user.wallet.balance
-    respond_to do |format|
-      if current_user.wallet.update(balance: value)
-        format.html { redirect_to user_profile_path(current_user), notice: 'Wallet was successfully updated.' }
-        format.json { render :show, status: :ok, location: @wallet }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @wallet.errors, status: :unprocessable_entity }
-      end
+
+    if can_add_balance?
+      add_balance
+      redirect_to user_profile_path(current_user), notice: 'Wallet was successfully updated.'
+    else
+      redirect_to user_profile_path(current_user), alert: 'You have reached the balance addition limit for today! Please try again tomorrow.'
     end
+
   end
 
   # DELETE /wallets/1 or /wallets/1.json
@@ -81,6 +76,23 @@ class WalletsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def wallet_params
     params.require(:wallet).permit(:balance, :items_sold, :earnings, :user_id)
+  end
+
+  def add_balance
+    current_user.wallet.update(balance: current_user.wallet.balance + 1, 
+                                last_balance_added_at: Time.current, 
+                                balance_added_count: current_user.wallet.balance_added_count + 1)
+  end
+
+  def can_add_balance?
+    return true if current_user.wallet.last_balance_added_at.nil? || current_user.wallet.balance_added_count.nil?
+
+    last_added_time = current_user.wallet.last_balance_added_at
+    current_time = Time.current
+    time_diff = current_time - last_added_time
+    time_diff_hours = time_diff / 1.hour
+
+    (time_diff_hours >= 24) || (current_user.wallet.balance_added_count + 1 <= 14)
   end
  
 end

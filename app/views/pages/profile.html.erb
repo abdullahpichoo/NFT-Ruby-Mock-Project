@@ -57,10 +57,7 @@
               </div>
             <% end %>
             <% if @user.wallet.id == current_user.wallet.id %>
-              <%= form_with(url: wallet_path(current_user.wallet), method: :put,data:{ turbo_frame: "price"}) do |f|%>
-                <%= f.hidden_field :balance, value:1 %>
-                <%= f.submit "+" , class: "cursor-pointer text-white px-2.5 py-0.5 bg-[#DF3C6C] w-fit font-semibold rounded-full cursor-pointer duration-200 transition-all;"%>
-              <% end %>
+              <%= button_to "+", wallet_path(current_user.wallet),  method: :put, data:{ turbo_frame: "price"}, class: "cursor-pointer text-white px-2.5 py-0.5 bg-[#DF3C6C] w-fit font-semibold rounded-full cursor-pointer duration-200 transition-all"  %>
             <% end %>
           </div>
         </div>
