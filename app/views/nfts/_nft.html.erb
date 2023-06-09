@@ -11,7 +11,7 @@
             <% temp_wallet=Wallet.find(nft.wallet_id) %>
             <% temp_user=User.find(temp_wallet.id) %>
             <% owner_wallet=temp_user.wallet %>
-            <%= link_to nft.wallet.user.username, user_profile_path(temp_user) %>
+            <%= link_to nft.owner, user_profile_path(temp_user) %>
           </div>
         </div>
         <div class="flex items-center">
